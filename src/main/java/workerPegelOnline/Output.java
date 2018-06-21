@@ -8,6 +8,10 @@ public final class Output {
 
     private String name;
 
+    private double lat;
+
+    private double lon;
+
     public String getName() {
         return name;
     }
@@ -24,12 +28,20 @@ public final class Output {
          this.bool = bool;
     }
 
-    public Point getPoint() {
-        return point;
+    public double getLon() {
+        return lon;
     }
 
-    public void setPoint(Point point) {
-         this.point = point;
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+         this.lat = lat;
     }
 
 }

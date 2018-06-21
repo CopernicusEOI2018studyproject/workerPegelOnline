@@ -99,9 +99,6 @@ public class WorkerPegelOnline {
 					Point point = new Point();
 
 					System.out.println(manipObj.getLat());
-					// set lat and lon of region
-					point.setLat(manipObj.getLat());
-					point.setLon(manipObj.getLon());
 
 					// // if measured height is smaller than flooding threshold, set to true
 					// if (value.getMeas() > value.getFlood()) {
@@ -111,7 +108,9 @@ public class WorkerPegelOnline {
 					Output output = new Output();
 					output.setName(key);
 					output.setBool(bool);
-					output.setPoint(point);
+					// set lat and lon of region
+					output.setLat(manipObj.getLat());
+					output.setLon(manipObj.getLon());
 
 					result = result.pair(key, output);
 					
@@ -123,16 +122,15 @@ public class WorkerPegelOnline {
 				.map((KeyValueMapper<String, Output, KeyValue<String, String>>) (key, value) -> {
 					KeyValue<String, String> result = null;
 
-					System.out.println(value.getPoint().getLat());
 					String outputString = value.getName().toString() + " - " + value.getBool().toString() + " - ["
-							+ String.valueOf(value.getPoint().getLat()) + ", "
-							+ String.valueOf(value.getPoint().getLon()) + "]";
+							+ String.valueOf(value.getLat()) + ", "
+							+ String.valueOf(value.getLon()) + "]";
 
 					result = result.pair(key, outputString);
 					return result;
 				});
 
-		outputStream.to("PegelOnlineBOOL");
+		outputStream.to("PegelOnlineOutput");
 
 		// #####################################################
 
